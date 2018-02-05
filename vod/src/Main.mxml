@@ -71,7 +71,7 @@
 				 labelField="title" change="playVideo(event)" width="165"/>-->
 	
 	<s:Label text="Pilih Video"/>
-	<s:List dataProvider="{videos}" change="playVideo(event)" labelField="src" />
+	<s:List dataProvider="{videos}" change="playVideo(event)" labelField="title" />
 	<s:Button x="365" y="512" label="Kembali" click="back(event)" />
 	
 </mx:Application>
