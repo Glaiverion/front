@@ -25,7 +25,7 @@
 	<mx:Text text="Livestream Wisuda UNIKOM" x="595" y="3" />
 	
 	<s:VideoPlayer x="345" y="25" width="670" height="453"> 
-		<s:DynamicStreamingVideoSource host="rtmp://wisuda-unikom.wawadukan.id/live" streamType="live"> 
+		<s:DynamicStreamingVideoSource host="rtmp://wawadukan.id/live" streamType="live"> 
 			<s:DynamicStreamingVideoItem streamName="wisuda"/> 
 		</s:DynamicStreamingVideoSource>
 	</s:VideoPlayer>
