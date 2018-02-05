@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import flash.net.navigateToURL;
+						
+			[Bindable]
+			private var loginDate:String;
+			private function hs_onFault(event:FaultEvent):void
+			{
+				Alert.show(event.fault.faultString,event.fault.name);
+			}
+			
+			private function hs_onResult(event:ResultEvent):void
+			{
+				
+				var response:XML = XML(event.result);
+				var status:int = Number(response.status);
+				loginDate = response.loginDate;
+				
+				if(status == 0)
+				{
+					Alert.show("Username dan Password tidak cocok", "Kesalahan");
+					return;
+				}
+				navigateToURL(new URLRequest('http://localhost/real/homeadmin/bin/homeadmin.html'),"_self")
+				txtPassword.text = "";
+				vws.selectedIndex = 1;
+			}
+			
+			
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HTTPService id="hs" showBusyCursor="true" resultFormat="e4x" method="POST" url="http://localhost/real/login/src/assets/login.php" result="hs_onResult(event)" fault="hs_onFault(event)">
+		
+		<mx:request xmlns="">
+			<username>{txtUsername.text}</username>
+			<password>{txtPassword.text}</password>
+		</mx:request>
+	</mx:HTTPService>
+	
+	<mx:Fade id="myFade" duration="1000"/>
+	<mx:Label x="10" y="10" text="Wisuda UNIKOM" fontSize="24" color="#FF0000"/>
+	<!--<mx:Label x="210" y="19" text="SAMPLE" fontWeight="bold" fontSize="24" color="#FFFFFF"/>-->
+	
+	<mx:ViewStack x="10" y="53" id="vws" width="300">
+		<mx:Form backgroundColor="#FFFFFF" backgroundAlpha="0.3" cornerRadius="5" borderStyle="solid" borderColor="#000000" showEffect="{myFade}" hideEffect="{myFade}" defaultButton="{btnLogin}">
+			<mx:FormItem label="NIM" required="true">	
+				<mx:TextInput id="txtUsername"/>
+			</mx:FormItem>
+			
+			<mx:FormItem label="Password" required="true">
+				<mx:TextInput id="txtPassword" displayAsPassword="true"/>
+			</mx:FormItem>
+			<mx:FormItem>
+				<mx:Button id="btnLogin" label="Login" click="hs.send()"/>
+			</mx:FormItem>
+		</mx:Form>
+		
+		<mx:Canvas height="100" backgroundColor="#FFFFFF" backgroundAlpha="0.3" cornerRadius="5" borderStyle="solid" borderColor="#000000" showEffect="{myFade}" hideEffect="{myFade}">
+			<mx:Label x="10" y="62" text="Selamat Datang, {txtUsername.text}"/>
+			<mx:Label x="10" y="36" text="Login @ {loginDate}"/>
+			<mx:Button x="10" y="62" label="Logout" click="vws.selectedIndex = 0"/>
+		</mx:Canvas>
+	</mx:ViewStack>
+	
+	
+</mx:Application>

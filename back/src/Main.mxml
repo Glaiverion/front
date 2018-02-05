@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" width="680" height="560" creationComplete="LiveStreams()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Style source = "lib/cobalt/src/defaults.css" />
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import flash.display.MovieClip;
+			import flash.events.*;
+			import flash.media.*;
+			import flash.net.NetConnection;
+			import flash.net.NetStream;
+			import mx.utils.ObjectUtil;
+			
+			var loginDate:String;
+			var nc:NetConnection;
+			var nc2:NetConnection;
+			var ns:NetStream;
+			var ns2:NetStream;
+			var video:Video;
+			var video2:Video;
+			var video3:Video;
+			var video4:Video;
+			var camera:Camera;
+			var camera2:Camera;
+			var mic:Microphone;
+			var mic2:Microphone;
+			private var meta:Object;
+			private var meta2:Object;
+			var videoCodec:H264VideoStreamSettings;
+			
+			
+			protected function back(event:MouseEvent):void
+				{
+					navigateToURL(new URLRequest('http://localhost/real/homeadmin/bin/homeadmin.html'),"_self")
+				}
+				
+			protected function kamera1(event:MouseEvent):void
+				{
+					uic.removeChild(video3);
+					uic.addChild(video);
+					buttonkamera1.enabled = false;
+					buttonkamera2.enabled = true;
+					ns2.close();
+					if (camera != null || mic != null)
+				{
+					// mulai publish
+					// trigger NetStream.Publish.Start
+					ns.publish(this.txtStream.text, "live");
+				} else 
+				{
+					trace("Please check your camera and microphone");
+				}
+				}
+				
+			protected function kamera2(event:MouseEvent):void
+				{
+					uic.removeChild(video);
+					uic.addChild(video3);
+					buttonkamera1.enabled = true;
+					buttonkamera2.enabled = false;
+					ns.close();
+					if (camera2 != null || mic2 != null)
+				{
+					// mulai publish
+					// trigger NetStream.Publish.Start
+					ns2.publish(this.txtStream.text, "live");
+				} else 
+				{
+					trace("Please check your camera and microphone");
+				}
+				}
+			
+			
+			public function LiveStreams()
+			{
+				startBtn.addEventListener(MouseEvent.CLICK, startHandler);
+				stopBtn.addEventListener(MouseEvent.CLICK, stopHandler);
+			}
+			
+			private function ns_onMetaData(item:Object):void 
+			{
+				trace("meta");
+				trace(ObjectUtil.toString(item));
+					
+			}
+			
+			private function ns_onCuePoint(item:Object):void
+			{
+				trace("cue");
+			}
+			
+			/*
+			* menyambung dan mulai publish livestream
+			*/
+			private function startHandler(event:MouseEvent):void
+			{
+				stopBtn.enabled = true;
+				iconrecord.enabled = true;
+				buttonkamera2.enabled = true;
+				startBtn.enabled =false;
+				trace("Okay, let's connect now");
+				
+				nc = new NetConnection();
+				nc.client=this;
+				nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				nc.connect(this.txtServer.text);
+				
+			}
+			
+			
+			/*
+			* Putus Server
+			*/
+			private function stopHandler(event:MouseEvent):void 
+			{
+				stopBtn.enabled = false;
+				iconrecord.enabled = false;
+				buttonkamera1.enabled = false;
+				buttonkamera2.enabled = false;
+				
+				startBtn.enabled =true;
+				if (ns)
+				{
+					trace("Clearing MetaData");
+					ns.send("@clearDataFrame", "onMetaData");
+				}
+				trace("Now we're disconnecting");
+				
+				nc.close();
+				
+			}
+			
+				
+			
+			private function netStatusHandler(event:NetStatusEvent):void
+			{
+				trace("connected is: " + nc.connected );
+				trace("event.info.level: " + event.info.level);
+				trace("event.info.code: " + event.info.code);
+				
+				switch (event.info.code)
+				{
+					case "NetConnection.Connect.Success":
+						trace("Congratulations! you're connected");
+						publishLiveStream();
+						break;
+					case "NetConnection.Connect.Rejected":
+						trace ("Oops! the connection was rejected");
+						break;
+					case "NetStream.Play.Stop":
+						trace("The stream has finished playing");
+						break;
+					case "NetStream.Play.StreamNotFound":
+						trace("The server could not find the stream you specified"); 
+						break;
+					case "NetStream.Publish.Start":
+						
+						trace("Adding metadata to the stream");
+						var metaData:Object = new Object();
+						metaData.title = "Stream Wisuda Unikom";
+						metaData.width = 200;
+						metaData.height = 150;
+						ns.send("@setDataFrame", "onMetaData", metaData);
+						break;
+					
+					case "NetStream.Publish.BadName":
+						trace("The stream name is already used");
+						break;
+				}
+						
+			}
+			
+			public function onBWDone():void{
+			}
+			
+			private function activityHandler(event:ActivityEvent):void {
+				trace("activityHandler: " + event);
+				trace("activating: " + event.activating);
+			} 
+			
+			/*
+			* live stream, attach camera dan microphone, dan
+			* publish ke server
+			*/
+			private function publishLiveStream():void 
+			{
+				ns = new NetStream(nc);
+				ns.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				var nsClient:Object = {};
+				nsClient.onMetaData = ns_onMetaData;
+				nsClient.onCuePoint = ns_onCuePoint;
+				ns.client = nsClient;
+				
+				ns2 = new NetStream(nc);
+				ns2.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+				var ns2Client:Object = {};
+				ns2Client.onMetaData = ns_onMetaData;
+				ns2Client.onCuePoint = ns_onCuePoint;
+				ns2.client = ns2Client;
+				
+				var pilihan_kamera:String = list_kamera.selectedIndex.toString();
+				var pilihan_microphone:int = list_microphone.selectedIndex;
+				var pilihan_kamera2:String = list_kamera2.selectedIndex.toString();
+				var pilihan_microphone2:int = list_microphone2.selectedIndex;
+				camera = Camera.getCamera(pilihan_kamera);
+				camera2 = Camera.getCamera(pilihan_kamera2);
+				mic = Microphone.getMicrophone(pilihan_microphone);
+				mic2 = Microphone.getMicrophone(pilihan_microphone2);
+				
+				if (camera != null){
+					
+					camera.addEventListener(ActivityEvent.ACTIVITY, activityHandler);
+					
+					video = new Video();
+					video.smoothing=true;
+					video.width=640;
+					video.height=365;
+					video.attachCamera(camera);
+					
+					video2 = new Video();
+					video2.smoothing=true;
+					video2.width=320;
+					video2.height=240;
+					video2.attachCamera(camera);
+					
+					video3 = new Video();
+					video3.smoothing=true;
+					video3.width=640;
+					video3.height=365;
+					video3.attachCamera(camera2);
+					
+					video4 = new Video();
+					video4.smoothing=true;
+					video4.width=320;
+					video4.height=240;
+					video4.attachCamera(camera2);
+									
+					videoCodec = new H264VideoStreamSettings();
+					videoCodec.setProfileLevel(H264Profile.BASELINE, H264Level.LEVEL_3_1);
+					camera.setQuality(100000, 0);
+					camera.setMode(640, 480, 30, true);
+					camera2.setQuality(100000, 0);
+					camera2.setMode(640,480,30,true);
+					ns.videoStreamSettings = videoCodec;
+					ns.attachCamera(camera);
+					ns2.videoStreamSettings = videoCodec;
+					ns2.attachCamera(camera2);
+					
+					uic.addChild(video);
+					uic2.addChild(video2);
+					uic3.addChild(video4);
+					
+					
+				}
+				
+				if (mic != null)
+				{
+					mic.addEventListener(ActivityEvent.ACTIVITY, activityHandler);
+					mic.codec = "Speex";
+					mic.rate = 44;
+					
+					ns.attachAudio(mic);
+				}	
+					if (mic2 != null) 
+				{
+					mic2.addEventListener(ActivityEvent.ACTIVITY, activityHandler);
+					mic2.codec = "Speex";
+					mic2.rate = 44;
+					
+					ns2.attachAudio(mic2);					
+				}
+				
+				if (camera != null || mic != null)
+				{
+					// mulai publish
+					// trigger NetStream.Publish.Start
+					ns.publish(this.txtStream.text, "live");
+				} else 
+				{
+					trace("Please check your camera and microphone");
+				}
+				
+				/*if (camera2 != null || mic2 != null)
+				{
+					// mulai publish
+					// trigger NetStream.Publish.Start
+					ns2.publish(this.txtStream.text, "live");
+				} else 
+				{
+					trace("Please check your camera and microphone");
+				}*/
+			} 
+			
+		]]>
+	</fx:Script>
+	
+	<!--- Video Display -->
+	
+	<s:Panel title="Tampilan Audience" fontSize="16" width="660" height="420" x="695" y="152">
+	
+		<mx:VideoDisplay id="uic"
+					 width="640"
+					 height="365"
+					 x="10"
+					 y="10" />
+	</s:Panel>
+	
+	
+	<s:Panel title="Kamera Preview" fontSize="16" width="670" height="315" x="10" y="152">
+		
+		<s:Label text="Kamera 1" y="10" x="10" fontSize="16" />
+		<s:Label text="Kamera 2" y="10" x="340" fontSize="16" />
+		
+		<mx:VideoDisplay id="uic2"
+					 width="320"
+					 height="240"
+					 x="10"
+					 y="30" />
+	
+	
+	
+		<mx:VideoDisplay id="uic3"
+					 width="320"
+					 height="240"
+					 x="340"
+					 y="30" />
+	</s:Panel>
+	
+	<mx:Button id="startBtn" x="15" y="105" label="Stream"/>
+	
+	<mx:Button enabled="false" id="stopBtn" x="93" y="105" label="Stop"/>
+	
+	<s:Image enabled="false" id="iconrecord" source="http://localhost/real/back/src/assets/record-icon.png" x="170" y="100" height="32" width="32" />
+	
+	<mx:ComboBox open="LiveStreams()"
+				 close="LiveStreams()"
+				 id="list_kamera"
+				 dataProvider="{Camera.names}"
+				 y="40"
+				 x="130"/>
+	
+	<mx:ComboBox open="LiveStreams()"
+				 close="LiveStreams()"
+				 id="list_microphone"
+				 dataProvider="{Microphone.names}"
+				 y="40"
+				 x="525"/>
+	
+	<mx:ComboBox open="LiveStreams()"
+				 close="LiveStreams()"
+				 id="list_kamera2"
+				 dataProvider="{Camera.names}"
+				 y="75"
+				 x="130"/>
+	
+	<mx:ComboBox open="LiveStreams()"
+				 close="LiveStreams()"
+				 id="list_microphone2"
+				 dataProvider="{Microphone.names}"
+				 y="75"
+				 x="525"/>
+	
+	<s:TextInput editable="false" x="90" y="11" id="txtServer" text="rtmp://localhost/live"/>
+	<s:TextInput visible="false" x="425" y="11" id="txtStream" text="wisuda"/>
+	<s:Label x="15" y="46" text="Pilih Kamera" fontSize="16"/>
+	<s:Label x="380" y="46" text="Pilih Microphone" fontSize="16"/>
+	<s:Label x="15" y="80" text="Pilih Kamera 2" fontSize="16"/>
+	<s:Label x="380" y="80" text="Pilih Microphone 2" fontSize="16"/>
+	<s:Label x="15" y="15" text="Server" fontSize="16"/>
+	<s:Label text="Switch Kamera Utama" y="485" x="12" fontSize="16" />
+	<s:Button x="12" y="510" label="Kembali" click="back(event)" />
+	<s:Button x="180" y="480" enabled="false" id="buttonkamera1" label="kamera 1" click="kamera1(event)" />
+	<s:Button x="250" y="480" enabled="false" id="buttonkamera2" label="kamera 2" click="kamera2(event)" />
+	
+	
+	
+</s:Application>

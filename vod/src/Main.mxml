@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				creationComplete="start()">
+	
+				<!--creationComplete="service.send()"-->
+				
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
+			import flash.net.navigateToURL;
+			import flash.net.*;
+			
+			private var newLoad:URLLoader;
+            private var link:String = "xl.xml";
+            private var req:URLRequest = new URLRequest(link);
+			
+			[Bindable]
+			private var videos : ArrayCollection;
+			
+			
+			private function start():void
+			{
+				
+				service.send();
+			}
+			
+			
+			protected function back(event:MouseEvent):void
+				{
+					navigateToURL(new URLRequest('http://localhost/real/home/bin/home.html'),"_self")
+				}
+			
+			private function resultHandler(event:ResultEvent):void
+			{
+				videos = event.result.videolist.video;
+				
+			}
+			
+			private function playVideo(event:Event):void
+			{
+				videoDisplay.source = "http://localhost/real/vod/src/assets/" + event.currentTarget.selectedItem.src;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HTTPService id="service" url="http://localhost/real/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	
+	
+	<s:VideoPlayer autoPlay="true" id="videoDisplay" width="640" height="480" x="15" />
+	<!--<mx:ComboBox prompt="Pilih Video ..." dataProvider="{videos}"
+				 labelField="title" change="playVideo(event)" width="165"/>-->
+	
+	<s:Label text="Pilih Video"/>
+	<s:List dataProvider="{videos}" change="playVideo(event)" labelField="src" />
+	<s:Button x="365" y="512" label="Kembali" click="back(event)" />
+	
+</mx:Application>
