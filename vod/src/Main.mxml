@@ -8,10 +8,26 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import flash.events.Event;
 			import mx.collections.ArrayCollection;
 			import mx.rpc.events.ResultEvent;
 			import flash.net.navigateToURL;
 			import flash.net.*;
+			
+	
+			
+			//use variables only if yu need them    
+/*		var variables : URLVariables = new URLVariables();
+        variables.something=ex;
+        urlRequest.data=variables;
+        var urlLoader:URLLoader = new URLLoader();
+		urlLoader.addEventListener(Event.COMPLETE, onComplete);
+        urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
+        urlLoader.addEventListener(IOErrorEvent.IO_ERROR,onError);
+        urlLoader.load(urlRequest);*/
+			
+		
+			
 			
 			private var newLoad:URLLoader;
             private var link:String = "xl.xml";
@@ -41,13 +57,13 @@
 			
 			private function playVideo(event:Event):void
 			{
-				videoDisplay.source = "http://localhost/real/vod/src/assets/" + event.currentTarget.selectedItem.src;
+				videoDisplay.source = "http://wisuda-unikom.wawadukan.id/vod/src/assets/" + event.currentTarget.selectedItem.src;
 			}
 			
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="service" url="http://localhost/real/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	<mx:HTTPService id="service" url="http://wisuda-unikom.wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
 	
 	
 	<s:VideoPlayer autoPlay="true" id="videoDisplay" width="640" height="480" x="15" />
