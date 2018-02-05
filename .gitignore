@@ -1,2 +1,4 @@
 /vod/src/assets/*.flv
 /upload/uploads/*.flv
+/vod/src/assets/*.xml
+latihanxml/

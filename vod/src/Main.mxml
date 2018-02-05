@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 				xmlns:s="library://ns.adobe.com/flex/spark"
-				creationComplete="start()">
+				creationComplete="start()" layout="absolute">
 	
 				<!--creationComplete="service.send()"-->
 				

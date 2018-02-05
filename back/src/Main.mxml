@@ -367,7 +367,7 @@
 				 y="75"
 				 x="525"/>
 	
-	<s:TextInput x="90" y="11" id="txtServer" text="rtmp://localhost/live"/>
+	<s:TextInput x="90" y="11" id="txtServer" text="rtmp://wisuda-unikom.wawadukan.id/back/bin/back.html/live"/>
 	<s:TextInput visible="false" x="425" y="11" id="txtStream" text="wisuda"/>
 	<s:Label x="15" y="46" text="Pilih Kamera" fontSize="16"/>
 	<s:Label x="380" y="46" text="Pilih Microphone" fontSize="16"/>
