@@ -16,12 +16,12 @@
 			
 			protected function clickmenulivestream_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('http://localhost/real/front/bin/front.html'),"_self")
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/front/bin/front.html'),"_self")
 			}
 			
 			protected function clickmenuvod_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('http://localhost/real/vod/bin/vod.html'),"_self")
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/vod/bin/vod.html'),"_self")
 			}
 			
 		]]>
