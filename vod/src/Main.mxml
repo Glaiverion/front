@@ -64,11 +64,11 @@
 			
 				<s:VideoPlayer autoPlay="true" id="videoDisplay" width="620" height="480" x="15" />
 		
-				<s:Panel title="Pilih Video.." fontSize="14" height="600" width="240">
+				<s:Panel title="Pilih Video.." fontSize="14" height="500" width="240">
 					
 					<s:VGroup>
 					
-						<s:List id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
+						<s:List height="100" id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
 					
 						<mx:ControlBar width="100%">
 							<s:Button label="Play" click="playVideo(event)" />
