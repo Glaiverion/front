@@ -52,7 +52,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="service" url="http://wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	<mx:HTTPService id="service" url="http://localhost/vod/src/assets/data.xml" result="resultHandler(event)"/>
 	
 	<s:VGroup>
 	
