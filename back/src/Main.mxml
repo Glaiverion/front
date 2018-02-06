@@ -38,7 +38,7 @@
 			
 			protected function back(event:MouseEvent):void
 				{
-					navigateToURL(new URLRequest('http://localhost/real/homeadmin/bin/homeadmin.html'),"_self")
+					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/homeadmin/bin/homeadmin.html'),"_self")
 				}
 				
 			protected function kamera1(event:MouseEvent):void
@@ -373,7 +373,6 @@
 	<s:Label x="380" y="46" text="Pilih Microphone" fontSize="16"/>
 	<s:Label x="15" y="80" text="Pilih Kamera 2" fontSize="16"/>
 	<s:Label x="380" y="80" text="Pilih Microphone 2" fontSize="16"/>
-	<s:Label x="15" y="15" text="Server" fontSize="16"/>
 	<s:Label text="Switch Kamera Utama" y="485" x="12" fontSize="16" />
 	<s:Button x="12" y="510" label="Kembali" click="back(event)" />
 	<s:Button x="180" y="480" enabled="false" id="buttonkamera1" label="kamera 1" click="kamera1(event)" />
