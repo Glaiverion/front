@@ -27,7 +27,7 @@
 			
 			private function start():void
 			{
-				navigateToURL(new URLRequest('/home/operation/gen.php'),"_self")
+				
 				service.send();
 				judul.text = tahun;
 			}
@@ -35,7 +35,7 @@
 			
 			protected function back(event:MouseEvent):void
 				{
-					navigateToURL(new URLRequest('http://localhost/real/home/bin/home.html'),"_self")
+					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/home/bin/home.html'),"_self")
 				}
 			
 			private function resultHandler(event:ResultEvent):void
@@ -53,7 +53,8 @@
 	</mx:Script>
 	
 	<mx:HTTPService id="service" url="http://wisuda-unikom.wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
-	
+	<!--<mx:HTTPService id="hs" resultFormat="e4x" method="POST" url="http://localhost/home/operation/gen.php" result="hs_onResult(event)" fault="hs_onFault(event)">
+	-->
 	<s:VGroup>
 	
 		<s:VGroup>
