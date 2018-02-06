@@ -48,13 +48,13 @@
 		
 		<s:VGroup>
 			
-			<s:Image source='http://localhost/real/home/src/assets/live.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
+			<s:Image source='http://wisuda-unikom.wawadukan.id/home/src/assets/live.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
 			<s:Label buttonMode="true" text="        Live Stream" textAlign="center" click="clickmenulivestream_clickHandler(event)"></s:Label>
 			
 		</s:VGroup>
 		
 		<s:VGroup>
-			<s:Image source='http://localhost/real/home/src/assets/video-player.png' buttonMode="true" width="160" height="160" click="clickmenuvod_clickHandler(event)"/>
+			<s:Image source='http://wisuda-unikom.wawadukan.id/home/src/assets/video-player.png' buttonMode="true" width="160" height="160" click="clickmenuvod_clickHandler(event)"/>
 			<s:Label buttonMode="true" click="clickmenuvod_clickHandler(event)" text="   Video on Demand"></s:Label>
 		</s:VGroup>
 		

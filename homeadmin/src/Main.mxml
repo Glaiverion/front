@@ -6,6 +6,8 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
+	<fx:Style source = "lib/cobalt/src/defaults.css" />
+	
 	<fx:Script>
 		<![CDATA[
 			import flash.net.navigateToURL;
@@ -17,18 +19,59 @@
 				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/back/bin/back.html'),"_self")
 			}
 			
-			protected function clickmenuvod_clickHandler(event:MouseEvent):void
+			protected function clickmenuupload_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/settingvod/bin/settingvod.html'),"_self")
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/upload/upload.html'),"_self")
+			}
+			
+			protected function clickmenuhapus_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/hapus/bin/hapus/hapus.html'),"_self")
 			}
 			
 		]]>
 	</fx:Script>
 	
+	<s:layout>
+            <s:VerticalLayout verticalAlign="top" horizontalAlign="center" paddingLeft="10" paddingRight="10"
+                paddingTop="25" paddingBottom="10"
+                gap="100" />
+        </s:layout>
+	
+	<s:VGroup>
+		<s:Label text="Selamat Datang Di Halaman Panitia Wisuda UNIKOM" fontSize="24"></s:Label>
+		<s:Label text="Silakan pilih salah satu menu di bawah ini." fontSize="16"></s:Label>
+	</s:VGroup>
+	
+	<s:Panel title="Menu" fontSize="16">
+		
+		<s:layout>
+            <s:HorizontalLayout paddingLeft="25" paddingRight="25"
+                paddingTop="20" paddingBottom="25"
+                gap="75" />
+        </s:layout>
+		
+		<s:VGroup>
+			
+			<s:Image source='http://wisuda-unikom.wawadukan.id/homeadmin/src/assets/live.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
+			<s:Label buttonMode="true" text="        Live Stream" textAlign="center" click="clickmenulivestream_clickHandler(event)"></s:Label>
+			
+		</s:VGroup>
+		
+		<s:VGroup>
+			<s:Image source='http://wisuda-unikom.wawadukan.id/homeadmin/src/assets/up-arrow.png' x="500" buttonMode="true" width="160" height="160" click="clickmenuupload_clickHandler(event)"/>
+			<s:Label buttonMode="true" click="clickmenuupload_clickHandler(event)" text="        Unggah Video"></s:Label>
+		</s:VGroup>
+		
+		<s:VGroup>
+			<s:Image source='http://wisuda-unikom.wawadukan.id/homeadmin/src/assets/video-file.png' x="500" buttonMode="true" width="160" height="160" click="clickmenuhapus_clickHandler(event)"/>
+			<s:Label buttonMode="true" click="clickmenuhapus_clickHandler(event)" text="       Hapus Video"></s:Label>
+		</s:VGroup> 
+		
+	</s:Panel>
 	
 	
-	<s:Image source='http://localhost/real/homeadmin/src/assets/lambang live stream admin.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
-	<s:Image source='http://localhost/real/homeadmin/src/assets/lambang vod admin.png' x="500" buttonMode="true" width="160" height="160" click="clickmenuvod_clickHandler(event)"/>
+	
 	
 	
 </s:Application>

@@ -12,8 +12,9 @@
 			private var loginDate:String;
 			private function hs_onFault(event:FaultEvent):void
 			{
-				Alert.show(event.fault.faultString, event.fault.name);
 				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/homeadmin/bin/homeadmin.html'),"_self")
+				Alert.show(event.fault.faultString, event.fault.name);
+				
 			}
 			
 			private function hs_onResult(event:ResultEvent):void
