@@ -68,11 +68,11 @@
 					
 					<s:VGroup>
 					
-						<s:List height="100" id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
+						<s:List id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
 					
-						<mx:ControlBar width="100%">
+						<!--<mx:ControlBar width="100%">
 							<s:Button label="Play" click="playVideo(event)" />
-						</mx:ControlBar>
+						</mx:ControlBar>-->
 							
 					</s:VGroup>	
 					
