@@ -46,13 +46,13 @@
 			
 			private function playVideo(event:Event):void
 			{
-				videoDisplay.source = "http://wisuda-unikom.wawadukan.id/vod/src/assets/" + list.selectedItem.src;
+				videoDisplay.source = "/usr/share/nginx/html/ls-wisuda-unikom/vod/src/assets/" + list.selectedItem.src;
 			}
 			
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="service" url="http://wisuda-unikom.wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	<mx:HTTPService id="service" url="/usr/share/nginx/html/ls-wisuda-unikom/vod/src/assets/data.xml" result="resultHandler(event)"/>
 	
 	<s:VGroup>
 	
