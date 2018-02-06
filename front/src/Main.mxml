@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx" width="680" height="560" layout="vertical">
+			   xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="start()">
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
@@ -16,21 +16,46 @@
 				{
 					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/home/bin/home.html'),"_self")
 				}
-			
+				
+				var now:Date = new Date();
+				var tahun:String = "Livestream Wisuda UNIKOM " + now.getFullYear();
+				
+				function start():void
+				{
+					judul.text = tahun;
+				}
+				
 		]]>
 	</fx:Script>
 
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" />
+	</s:layout>
 	
 	
-	<mx:Text text="Livestream Wisuda UNIKOM" x="595" y="3" />
-	
-	<s:VideoPlayer x="345" y="25" width="670" height="453"> 
-		<s:DynamicStreamingVideoSource host="rtmp://wawadukan.id/live" streamType="live"> 
-			<s:DynamicStreamingVideoItem streamName="wisuda"/> 
-		</s:DynamicStreamingVideoSource>
-	</s:VideoPlayer>
+		<s:VGroup paddingTop="10">
 		
+			<mx:Text id="judul" text="tahun" fontSize="24"  />
+			
+			<s:HGroup>
+			
+				<s:VideoPlayer width="670" height="453"> 
+					<s:DynamicStreamingVideoSource host="rtmp://wawadukan.id/live" streamType="live"> 
+						<s:DynamicStreamingVideoItem streamName="wisuda"/> 
+					</s:DynamicStreamingVideoSource>
+				</s:VideoPlayer>
+				
+				<s:Panel title="Catatan" fontSize="14" height="230" width="240">
+					<s:TextArea x="10" y="10" fontSize="14" text="Apabila Tampilan video tidak muncul, kemungkinan sedang tidak ada live streaming yang berlangsung. apabila muncul warning berupa perijinan certificate, pilih yes."/>
+				</s:Panel>
+				
+			</s:HGroup>
 		
-	<s:Button x="345" y="485" label="Kembali" click="back(event)" />
+			<s:Button label="Kembali" click="back(event)" />
+		</s:VGroup>
+		
+			
+			
+		
 	
 </s:Application>

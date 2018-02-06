@@ -1,37 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 				xmlns:s="library://ns.adobe.com/flex/spark"
-				creationComplete="start()" layout="absolute">
+				creationComplete="start()" >
 	
 				<!--creationComplete="service.send()"-->
 				
+	<mx:Style source = "lib/cobalt/src/defaults.css" />
 	
 	<mx:Script>
 		<![CDATA[
 			import flash.events.Event;
 			import mx.collections.ArrayCollection;
 			import mx.rpc.events.ResultEvent;
+			import flash.events.*;
 			import flash.net.navigateToURL;
 			import flash.net.*;
 			
-	
+ 
+			var now:Date = new Date();
+				var tahun:String = "Video on Demand Wisuda UNIKOM " + now.getFullYear();
 			
-			//use variables only if yu need them    
-/*		var variables : URLVariables = new URLVariables();
-        variables.something=ex;
-        urlRequest.data=variables;
-        var urlLoader:URLLoader = new URLLoader();
-		urlLoader.addEventListener(Event.COMPLETE, onComplete);
-        urlLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-        urlLoader.addEventListener(IOErrorEvent.IO_ERROR,onError);
-        urlLoader.load(urlRequest);*/
-			
-		
-			
-			
-			private var newLoad:URLLoader;
-            private var link:String = "xl.xml";
-            private var req:URLRequest = new URLRequest(link);
 			
 			[Bindable]
 			private var videos : ArrayCollection;
@@ -39,8 +27,9 @@
 			
 			private function start():void
 			{
-				
+				//navigateToURL(new URLRequest('/home/operation/gen.php'),"_self")
 				service.send();
+				judul.text = tahun;
 			}
 			
 			
@@ -57,21 +46,55 @@
 			
 			private function playVideo(event:Event):void
 			{
-				videoDisplay.source = "http://wisuda-unikom.wawadukan.id/vod/src/assets/" + event.currentTarget.selectedItem.src;
+				videoDisplay.source = "http://wawadukan.id/vod/src/assets/" + list.selectedItem.src;
 			}
 			
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="service" url="http://wisuda-unikom.wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	<mx:HTTPService id="service" url="http://wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	
+	<s:VGroup>
+	
+		<s:VGroup>
+		
+			<mx:Text id="judul" text="tahun" fontSize="24"  />
+	
+			<s:HGroup>
+			
+				<s:VideoPlayer autoPlay="true" id="videoDisplay" width="640" height="480" x="15" />
+		
+				<s:Panel title="Pilih Video.." fontSize="14" width="240">
+					
+					<s:VGroup>
+					
+						<s:List id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
+					
+						<mx:ControlBar width="100%">
+							<s:Button label="Play" click="playVideo(event)" />
+						</mx:ControlBar>
+							
+					</s:VGroup>	
+					
+				</s:Panel>
+			
+			</s:HGroup>
+				
+		</s:VGroup>
+	
+		<s:Button label="Kembali" click="back(event)" />
+		
+	</s:VGroup>
+	
+		
+		
 	
 	
-	<s:VideoPlayer autoPlay="true" id="videoDisplay" width="640" height="480" x="15" />
+	
 	<!--<mx:ComboBox prompt="Pilih Video ..." dataProvider="{videos}"
 				 labelField="title" change="playVideo(event)" width="165"/>-->
 	
-	<s:Label text="Pilih Video"/>
-	<s:List dataProvider="{videos}" change="playVideo(event)" labelField="title" />
-	<s:Button x="365" y="512" label="Kembali" click="back(event)" />
+	
+	
 	
 </mx:Application>

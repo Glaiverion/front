@@ -6,6 +6,8 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
+	<fx:Style source = "lib/cobalt/src/defaults.css" />
+	
 	<fx:Script>
 		<![CDATA[
 			import flash.net.navigateToURL;
@@ -25,10 +27,39 @@
 		]]>
 	</fx:Script>
 	
+	<s:layout>
+            <s:VerticalLayout verticalAlign="top" horizontalAlign="center" paddingLeft="10" paddingRight="10"
+                paddingTop="25" paddingBottom="10"
+                gap="100" />
+        </s:layout>
 	
+	<s:VGroup>
+		<s:Label text="Selamat Datang Di Layanan Streaming Wisuda UNIKOM" fontSize="24"></s:Label>
+		<s:Label text="Silakan pilih salah satu menu di bawah ini." fontSize="16"></s:Label>
+	</s:VGroup>
 	
-	<s:Image source='http://localhost/real/home/src/assets/webcam.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
-	<s:Image source='http://localhost/real/home/src/assets/vod.jpg' x="500" buttonMode="true" width="160" height="160" click="clickmenuvod_clickHandler(event)"/>
+	<s:Panel title="Menu" fontSize="16">
+		
+		<s:layout>
+            <s:HorizontalLayout paddingLeft="25" paddingRight="25"
+                paddingTop="20" paddingBottom="25"
+                gap="75" />
+        </s:layout>
+		
+		<s:VGroup>
+			
+			<s:Image source='http://localhost/real/home/src/assets/live.png' buttonMode="true" width="160" height="160" click="clickmenulivestream_clickHandler(event)"/>
+			<s:Label buttonMode="true" text="        Live Stream" textAlign="center" click="clickmenulivestream_clickHandler(event)"></s:Label>
+			
+		</s:VGroup>
+		
+		<s:VGroup>
+			<s:Image source='http://localhost/real/home/src/assets/video-player.png' buttonMode="true" width="160" height="160" click="clickmenuvod_clickHandler(event)"/>
+			<s:Label buttonMode="true" click="clickmenuvod_clickHandler(event)" text="   Video on Demand"></s:Label>
+		</s:VGroup>
+		
+	</s:Panel>
+	
 	
 	
 </s:Application>
