@@ -29,6 +29,7 @@
 			{
 				
 				service.send();
+				hs.send();
 				judul.text = tahun;
 			}
 			
@@ -53,8 +54,8 @@
 	</mx:Script>
 	
 	<mx:HTTPService id="service" url="http://wisuda-unikom.wawadukan.id/vod/src/assets/data.xml" result="resultHandler(event)"/>
-	<!--<mx:HTTPService id="hs" resultFormat="e4x" method="POST" url="http://localhost/home/operation/gen.php" result="hs_onResult(event)" fault="hs_onFault(event)">
-	-->
+	<mx:HTTPService id="hs" resultFormat="e4x" method="POST" url="/home/operation/gen.php" />
+	
 	<s:VGroup>
 	
 		<s:VGroup>
