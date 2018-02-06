@@ -1,5 +1,5 @@
 <?php
-$target_dir = "C:/xampp/htdocs/vod/src/assets/";
+$target_dir = "http://wisuda-unikom.wawadukan.id/vod/src/assets/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);

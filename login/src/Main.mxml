@@ -12,7 +12,8 @@
 			private var loginDate:String;
 			private function hs_onFault(event:FaultEvent):void
 			{
-				Alert.show(event.fault.faultString,event.fault.name);
+				Alert.show(event.fault.faultString, event.fault.name);
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/homeadmin/bin/homeadmin.html'),"_self")
 			}
 			
 			private function hs_onResult(event:ResultEvent):void
@@ -37,7 +38,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="hs" showBusyCursor="true" resultFormat="e4x" method="POST" url="https://wisuda-unikom.wawadukan.id/login/src/assets/login.php" result="hs_onResult(event)" fault="hs_onFault(event)">
+	<mx:HTTPService id="hs" showBusyCursor="true" resultFormat="e4x" method="POST" url="http://wisuda-unikom.wawadukan.id/login/src/assets/login.php" result="hs_onResult(event)" fault="hs_onFault(event)">
 		
 		<mx:request xmlns="">
 			<username>{txtUsername.text}</username>
@@ -51,7 +52,7 @@
 	
 	<mx:ViewStack x="10" y="53" id="vws" width="300">
 		<mx:Form backgroundColor="#FFFFFF" backgroundAlpha="0.3" cornerRadius="5" borderStyle="solid" borderColor="#000000" showEffect="{myFade}" hideEffect="{myFade}" defaultButton="{btnLogin}">
-			<mx:FormItem label="NIM" required="true">	
+			<mx:FormItem label="NIM/NIP" required="true">	
 				<mx:TextInput id="txtUsername"/>
 			</mx:FormItem>
 			

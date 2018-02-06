@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:mx="library://ns.adobe.com/flex/mx" creationComplete="start()">
+	
+	<fx:Declarations>
+		<mx:HTTPService id="service" url="http://localhost/real/vod/src/assets/data.xml" result="resultHandler(event)"/>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+		
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.ResultEvent;
+			import flash.events.*;
+			import flash.net.navigateToURL;
+			import flash.net.*;
+			
+				var dataxml : XML;	
+			
+			[Bindable]
+			private var videos : ArrayCollection;
+			
+			
+			private function start():void
+			{
+				
+				
+				
+				
+				service.send();
+			
+			}
+			
+			function clickhapus(event:MouseEvent):void
+			{
+				//delete ;
+               // txtArea.text = someXML.toXMLString();
+			}
+			
+			
+			private function resultHandler(event:ResultEvent):void
+			{
+				videos = event.result.videolist.video;
+				
+			}
+			
+			
+			
+		]]>
+	</fx:Script>
+	
+	
+	
+		
+	<s:List id="list" fontSize="12" dataProvider="{videos}" labelField="title" />
+	<s:Button label="Hapus" click="clickhapus(event)"/>
+</s:Application>

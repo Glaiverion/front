@@ -20,6 +20,7 @@
 			var now:Date = new Date();
 				var tahun:String = "Video on Demand Wisuda UNIKOM ";
 			
+				
 			
 			[Bindable]
 			private var videos : ArrayCollection;
@@ -27,6 +28,9 @@
 			
 			private function start():void
 			{
+				var loader:URLLoader = new URLLoader(); 
+				var request:URLRequest = new URLRequest("http://wisuda-unikom.wawadukan.id/vod/src/gen.php"); 
+				loader.load(request); 
 				
 				service.send();
 				judul.text = tahun;
