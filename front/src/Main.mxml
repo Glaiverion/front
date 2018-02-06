@@ -14,7 +14,7 @@
 		
 				protected function back(event:MouseEvent):void
 				{
-					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/home/bin/home.html'),"_self")
+					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id'),"_self")
 				}
 				
 				var now:Date = new Date();

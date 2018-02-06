@@ -35,7 +35,7 @@
 			
 			protected function back(event:MouseEvent):void
 				{
-					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/home/bin/home.html'),"_self")
+					navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id'),"_self")
 				}
 			
 			private function resultHandler(event:ResultEvent):void
@@ -64,7 +64,7 @@
 			
 				<s:VideoPlayer autoPlay="true" id="videoDisplay" width="620" height="480" x="15" />
 		
-				<s:Panel title="Pilih Video.." fontSize="14" height="500" width="240">
+				<s:Panel title="Pilih Video.." fontSize="14" height="485" width="240">
 					
 					<s:VGroup>
 					

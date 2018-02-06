@@ -27,7 +27,7 @@
 					Alert.show("Username dan Password tidak cocok", "Kesalahan");
 					return;
 				}
-				navigateToURL(new URLRequest('http://localhost/real/homeadmin/bin/homeadmin.html'),"_self")
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/homeadmin/bin/homeadmin.html'),"_self")
 				txtPassword.text = "";
 				vws.selectedIndex = 1;
 			}
@@ -37,7 +37,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="hs" showBusyCursor="true" resultFormat="e4x" method="POST" url="http://localhost/real/login/src/assets/login.php" result="hs_onResult(event)" fault="hs_onFault(event)">
+	<mx:HTTPService id="hs" showBusyCursor="true" resultFormat="e4x" method="POST" url="http://wisuda-unikom.wawadukan.id/login/src/assets/login.php" result="hs_onResult(event)" fault="hs_onFault(event)">
 		
 		<mx:request xmlns="">
 			<username>{txtUsername.text}</username>
