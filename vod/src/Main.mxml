@@ -18,7 +18,7 @@
 			
  
 			var now:Date = new Date();
-				var tahun:String = "Video on Demand Wisuda UNIKOM " + now.getFullYear();
+				var tahun:String = "Video on Demand Wisuda UNIKOM ";
 			
 			
 			[Bindable]
@@ -27,7 +27,7 @@
 			
 			private function start():void
 			{
-				//navigateToURL(new URLRequest('/home/operation/gen.php'),"_self")
+				navigateToURL(new URLRequest('/home/operation/gen.php'),"_self")
 				service.send();
 				judul.text = tahun;
 			}
@@ -62,7 +62,7 @@
 	
 			<s:HGroup>
 			
-				<s:VideoPlayer autoPlay="true" id="videoDisplay" width="640" height="480" x="15" />
+				<s:VideoPlayer autoPlay="true" id="videoDisplay" width="620" height="480" x="15" />
 		
 				<s:Panel title="Pilih Video.." fontSize="14" width="240">
 					
