@@ -26,7 +26,7 @@
 			
 			protected function clickmenuhapus_clickHandler(event:MouseEvent):void
 			{
-				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/hapus/bin/hapus/hapus.html'),"_self")
+				navigateToURL(new URLRequest('http://wisuda-unikom.wawadukan.id/Hapus/bin/hapus.html'),"_self")
 			}
 			
 		]]>

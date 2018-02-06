@@ -35,6 +35,9 @@
       <path-element>C:\xampp\htdocs\real\Hapus\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
+    <library-path append="true">
+      <path-element>C:\xampp\htdocs\real\Hapus\src\lib\cobalt\cobalt.swc</path-element>
+    </library-path>
   </compiler>
   <file-specs>
     <path-element>C:\xampp\htdocs\real\Hapus\src\Main.mxml</path-element>
