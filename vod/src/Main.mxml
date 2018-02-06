@@ -52,7 +52,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="service" url="http://localhost/vod/src/assets/data.xml" result="resultHandler(event)"/>
+	<mx:HTTPService id="service" url="http://usr/share/nginx/html/ls-wisuda-unikom/vod/src/assets/data.xml" result="resultHandler(event)"/>
 	
 	<s:VGroup>
 	
