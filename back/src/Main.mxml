@@ -304,7 +304,7 @@
 	
 	<!--- Video Display -->
 	
-	<s:Panel title="Tampilan Audience" fontSize="16" width="660" height="420" x="695" y="152">
+	<s:Panel title="Tampilan Audience" fontSize="16" width="660" height="420" x="695" y="127">
 	
 		<mx:VideoDisplay id="uic"
 					 width="640"
@@ -314,7 +314,7 @@
 	</s:Panel>
 	
 	
-	<s:Panel title="Kamera Preview" fontSize="16" width="670" height="315" x="10" y="152">
+	<s:Panel title="Kamera Preview" fontSize="16" width="670" height="315" x="10" y="127">
 		
 		<s:Label text="Kamera 1" y="10" x="10" fontSize="16" />
 		<s:Label text="Kamera 2" y="10" x="340" fontSize="16" />
@@ -334,31 +334,31 @@
 					 y="30" />
 	</s:Panel>
 	
-	<mx:Button id="startBtn" x="15" y="105" label="Stream"/>
+	<mx:Button id="startBtn" x="15" y="180" label="Stream"/>
 	
-	<mx:Button enabled="false" id="stopBtn" x="93" y="105" label="Stop"/>
+	<mx:Button enabled="false" id="stopBtn" x="93" y="180" label="Stop"/>
 	
-	<s:Image enabled="false" id="iconrecord" source="http://localhost/real/back/src/assets/record-icon.png" x="170" y="100" height="32" width="32" />
+	<s:Image enabled="false" id="iconrecord" source="http://localhost/real/back/src/assets/record-icon.png" x="170" y="75" height="32" width="32" />
 	
 	<mx:ComboBox open="LiveStreams()"
 				 close="LiveStreams()"
 				 id="list_kamera"
 				 dataProvider="{Camera.names}"
-				 y="40"
+				 y="15"
 				 x="130"/>
 	
 	<mx:ComboBox open="LiveStreams()"
 				 close="LiveStreams()"
 				 id="list_microphone"
 				 dataProvider="{Microphone.names}"
-				 y="40"
+				 y="15"
 				 x="525"/>
 	
 	<mx:ComboBox open="LiveStreams()"
 				 close="LiveStreams()"
 				 id="list_kamera2"
 				 dataProvider="{Camera.names}"
-				 y="75"
+				 y="50"
 				 x="130"/>
 	
 	<!--<mx:ComboBox open="LiveStreams()"
@@ -370,13 +370,13 @@
 	
 	<s:TextInput visible="false" x="90" y="11" id="txtServer" text="rtmp://wisuda-unikom.wawadukan.id/live"/>
 	<s:TextInput visible="false" x="425" y="11" id="txtStream" text="wisuda"/>
-	<s:Label x="15" y="46" text="Pilih Kamera" fontSize="16"/>
-	<s:Label x="380" y="46" text="Pilih Microphone" fontSize="16"/>
-	<s:Label x="15" y="80" text="Pilih Kamera 2" fontSize="16"/>
-	<s:Label text="Switch Kamera Utama" y="485" x="12" fontSize="16" />
-	<s:Button x="12" y="510" label="Kembali" click="back(event)" />
-	<s:Button x="180" y="480" enabled="false" id="buttonkamera1" label="kamera 1" click="kamera1(event)" />
-	<s:Button x="250" y="480" enabled="false" id="buttonkamera2" label="kamera 2" click="kamera2(event)" />
+	<s:Label x="15" y="21" text="Pilih Kamera" fontSize="16"/>
+	<s:Label x="380" y="21" text="Pilih Microphone" fontSize="16"/>
+	<s:Label x="15" y="55" text="Pilih Kamera 2" fontSize="16"/>
+	<s:Label text="Switch Kamera Utama" y="460" x="12" fontSize="16" />
+	<s:Button x="12" y="485" label="Kembali" click="back(event)" />
+	<s:Button x="180" y="455" enabled="false" id="buttonkamera1" label="kamera 1" click="kamera1(event)" />
+	<s:Button x="250" y="455" enabled="false" id="buttonkamera2" label="kamera 2" click="kamera2(event)" />
 	
 	
 	
