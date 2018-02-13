@@ -334,9 +334,9 @@
 					 y="30" />
 	</s:Panel>
 	
-	<mx:Button id="startBtn" x="15" y="180" label="Stream"/>
+	<mx:Button id="startBtn" x="15" y="130" label="Stream"/>
 	
-	<mx:Button enabled="false" id="stopBtn" x="93" y="180" label="Stop"/>
+	<mx:Button enabled="false" id="stopBtn" x="93" y="130" label="Stop"/>
 	
 	<s:Image enabled="false" id="iconrecord" source="http://localhost/real/back/src/assets/record-icon.png" x="170" y="75" height="32" width="32" />
 	
