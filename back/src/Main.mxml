@@ -30,7 +30,6 @@
 			var camera:Camera;
 			var camera2:Camera;
 			var mic:Microphone;
-			var mic2:Microphone;
 			private var meta:Object;
 			private var meta2:Object;
 			var videoCodec:H264VideoStreamSettings;
@@ -66,7 +65,7 @@
 					buttonkamera1.enabled = true;
 					buttonkamera2.enabled = false;
 					ns.close();
-					if (camera2 != null || mic2 != null)
+					if (camera2 != null || mic != null)
 				{
 					// mulai publish
 					// trigger NetStream.Publish.Start
@@ -208,11 +207,11 @@
 				var pilihan_kamera:String = list_kamera.selectedIndex.toString();
 				var pilihan_microphone:int = list_microphone.selectedIndex;
 				var pilihan_kamera2:String = list_kamera2.selectedIndex.toString();
-				var pilihan_microphone2:int = list_microphone2.selectedIndex;
+				//var pilihan_microphone2:int = list_microphone2.selectedIndex;
 				camera = Camera.getCamera(pilihan_kamera);
 				camera2 = Camera.getCamera(pilihan_kamera2);
 				mic = Microphone.getMicrophone(pilihan_microphone);
-				mic2 = Microphone.getMicrophone(pilihan_microphone2);
+				//mic2 = Microphone.getMicrophone(pilihan_microphone2);
 				
 				if (camera != null){
 					
@@ -267,7 +266,9 @@
 					mic.rate = 44;
 					
 					ns.attachAudio(mic);
+					ns2.attachAudio(mic);
 				}	
+				/*
 					if (mic2 != null) 
 				{
 					mic2.addEventListener(ActivityEvent.ACTIVITY, activityHandler);
@@ -275,7 +276,7 @@
 					mic2.rate = 44;
 					
 					ns2.attachAudio(mic2);					
-				}
+				}*/
 				
 				if (camera != null || mic != null)
 				{
@@ -360,19 +361,18 @@
 				 y="75"
 				 x="130"/>
 	
-	<mx:ComboBox open="LiveStreams()"
+	<!--<mx:ComboBox open="LiveStreams()"
 				 close="LiveStreams()"
 				 id="list_microphone2"
 				 dataProvider="{Microphone.names}"
 				 y="75"
-				 x="525"/>
+				 x="525"/>-->
 	
 	<s:TextInput visible="false" x="90" y="11" id="txtServer" text="rtmp://wisuda-unikom.wawadukan.id/live"/>
 	<s:TextInput visible="false" x="425" y="11" id="txtStream" text="wisuda"/>
 	<s:Label x="15" y="46" text="Pilih Kamera" fontSize="16"/>
 	<s:Label x="380" y="46" text="Pilih Microphone" fontSize="16"/>
 	<s:Label x="15" y="80" text="Pilih Kamera 2" fontSize="16"/>
-	<s:Label x="380" y="80" text="Pilih Microphone 2" fontSize="16"/>
 	<s:Label text="Switch Kamera Utama" y="485" x="12" fontSize="16" />
 	<s:Button x="12" y="510" label="Kembali" click="back(event)" />
 	<s:Button x="180" y="480" enabled="false" id="buttonkamera1" label="kamera 1" click="kamera1(event)" />
