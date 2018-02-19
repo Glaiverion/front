@@ -45,10 +45,6 @@
 					</s:DynamicStreamingVideoSource>
 				</s:VideoPlayer>
 				
-				<s:Panel title="Catatan" fontSize="14" height="230" width="240">
-					<s:TextArea x="10" y="10" fontSize="14" text="Apabila Tampilan video tidak muncul, kemungkinan sedang tidak ada live streaming yang berlangsung. apabila muncul warning berupa perijinan certificate, pilih yes."/>
-				</s:Panel>
-				
 			</s:HGroup>
 		
 			<s:Button label="Kembali" click="back(event)" />
