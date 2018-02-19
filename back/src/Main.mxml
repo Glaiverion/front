@@ -243,9 +243,9 @@
 									
 					videoCodec = new H264VideoStreamSettings();
 					videoCodec.setProfileLevel(H264Profile.BASELINE, H264Level.LEVEL_3_1);
-					camera.setQuality(50000, 0);
+					camera.setQuality(25000, 0);
 					camera.setMode(1280, 720, 30, true);
-					camera2.setQuality(50000, 0);
+					camera2.setQuality(25000, 0);
 					camera2.setMode(1280,720,30,true);
 					ns.videoStreamSettings = videoCodec;
 					ns.attachCamera(camera);
